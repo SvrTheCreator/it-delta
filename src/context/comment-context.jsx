@@ -8,15 +8,21 @@ const CommentContext = createContext({
 export function CommentContextProvider({ children }) {
   const [dataImages, setDataImages] = useState([])
   const [loading, setLoading] = useState(false)
-  const [fullItem, setFullItem] = useState([])
+  const [fullItem, setFullItem] = useState()
 
   useEffect(() => {
     async function preload() {
       setLoading(true)
-      const response = await fetch(
+      const responseImage = await fetch(
         'http://test-backend.itdelta.agency/api/images'
-      ).then((response) => response.json())
-      setDataImages(response)
+      ).then((responseImage) => responseImage.json())
+      setDataImages(responseImage)
+
+      const responseFullItem = await fetch(
+        'http://test-backend.itdelta.agency/api/image/:imageId'
+      ).then((responseFullItem) => responseFullItem.json())
+      setFullItem(responseFullItem)
+
       setLoading(false)
     }
     preload()

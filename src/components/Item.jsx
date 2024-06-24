@@ -12,7 +12,7 @@ export default function Item(props) {
     setFullItem({
       id: props.item.id,
       image: props.item.image,
-      comment: [''],
+      comment: '',
     })
     setIsModalOpen(true)
   }
@@ -23,7 +23,7 @@ export default function Item(props) {
     setIsModalOpen(false)
   }
   return (
-    <div>
+    <div style={item}>
       <Card>
         <Image
           onClick={showModal}

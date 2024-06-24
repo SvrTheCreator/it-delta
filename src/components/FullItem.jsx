@@ -40,8 +40,7 @@ export default function FullItem(props) {
   }
 
   function addComment() {
-    // if (commentInput !== '')
-    if (commentInput.trim() != '') {
+    if (commentInput.trim() !== '') {
       setComments([commentInput, ...comments])
       setFullItem({ ...fullItem, comment: comments })
       setCommentInput('')
