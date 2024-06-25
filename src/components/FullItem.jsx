@@ -6,7 +6,6 @@ const { TextArea } = Input
 export default function FullItem(props) {
   const { fullItem, setFullItem } = useContext(CommentContext)
   const [commentInput, setCommentInput] = useState('')
-  const [comments, setComments] = useState([])
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -24,7 +23,7 @@ export default function FullItem(props) {
         method: 'POST',
         body: JSON.stringify({
           imageID: fullItem.id,
-          comments: comments,
+          comments: props.comments,
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -41,10 +40,11 @@ export default function FullItem(props) {
 
   function addComment() {
     if (commentInput.trim() !== '') {
-      setComments([commentInput, ...comments])
-      setFullItem({ ...fullItem, comment: comments })
+      props.setComments([commentInput, ...props.comments])
+      setFullItem({ ...fullItem, comments: props.comments })
       setCommentInput('')
       postData()
+      console.log(fullItem)
     }
   }
 
@@ -73,8 +73,8 @@ export default function FullItem(props) {
         preview={false}
         src={fullItem.image}
       />
-      {comments &&
-        comments.map((el, id) => (
+      {props.comments &&
+        props.comments.map((el, id) => (
           <Card key={id} style={{ margin: '20px 0 20px 0' }}>
             {el}
           </Card>

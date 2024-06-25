@@ -6,14 +6,15 @@ import { Image, Card } from 'antd'
 
 export default function Item(props) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { setFullItem } = useContext(CommentContext)
-
+  const { fullItem, setFullItem } = useContext(CommentContext)
+  const [comments, setComments] = useState([])
   const showModal = () => {
     setFullItem({
       id: props.item.id,
       image: props.item.image,
-      comment: '',
+      comments: comments,
     })
+    console.log(fullItem)
     setIsModalOpen(true)
   }
   const handleOk = () => {
@@ -35,6 +36,8 @@ export default function Item(props) {
       <>
         {isModalOpen && (
           <FullItem
+            comments={comments}
+            setComments={setComments}
             open={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}

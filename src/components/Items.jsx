@@ -8,7 +8,7 @@ const row = {
   padding: '20px',
 }
 
-export default function Items(props) {
+export default function Items() {
   const { dataImages } = useContext(CommentContext)
 
   return (
